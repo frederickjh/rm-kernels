@@ -1,5 +1,8 @@
 #!/bin/bash
-
+# For testing. First line outputs line numbers.
+# Second line says to output what is going on in script
+PS4=':${LINENO}+'
+#set -x
 # NAME: rm-kernels-server
 # PATH: /usr/local/bin
 # DESC: Provide dialog checklist of kernels to remove
@@ -22,12 +25,12 @@
 
 # Must be running as sudo
 if [[ $(id -u) != 0 ]]; then
-    echo "root access required. Use: sudo rm-kernels-server"
+    echo "root access is required. Use: sudo rm-kernels-server"
     exit 99
 fi
 
 # Must have the dialog package. On Servers, not installed by default
-command -v dialog >/dev/null 2>&1 || { echo >&2 "dialog package required but it is not installed.  Aborting."; exit 99; }
+command -v dialog >/dev/null 2>&1 || { echo >&2 "The dialog package is required but it is not installed. Install with sudo apt install dialog. Aborting."; exit 99; }
 
 OLDIFS="$IFS"
 IFS="|"
